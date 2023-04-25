@@ -19,7 +19,8 @@ describe("One Service", () => {
   });
 
   it("should be able to search for more services", () => {
-
+    cy.get("input[name='search']").type("cooking")
+    cy.get("#search-results").should('have.length.gte', 1)
   })
 
   it("should have a image", () => {
