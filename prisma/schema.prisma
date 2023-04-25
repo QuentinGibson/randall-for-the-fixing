@@ -15,6 +15,7 @@ model User {
   updatedAt DateTime @updatedAt
 
   password Password?
+  Blog     Blog[]
 }
 
 model Password {
@@ -24,3 +25,98 @@ model Password {
   userId String @unique
 }
 
+model ServiceType {
+  id   String @id @default(cuid())
+  name String @unique
+
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Service     Service[]
+  Testimonies Testimonies[]
+}
+
+model Service {
+  id                 String         @id @default(cuid())
+  name               String         @unique
+  type               ServiceType    @relation(fields: [serviceTypeId], references: [id])
+  image              String
+  subtext            String
+  serviceDescription String
+  serviceFiller      String
+  gallery            ServiceImage[]
+  serviceCta         String
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  serviceTypeId String
+  Project       Project[]
+}
+
+model ServiceImage {
+  id      String  @id @default(cuid())
+  name    String  @unique
+  image   String
+  service Service @relation(fields: [serviceId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  serviceId String
+}
+
+model Project {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  image       String
+  service     Service @relation(fields: [serviceId], references: [id])
+  projectBody String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  serviceId String
+}
+
+model Blog {
+  id       String @id @default(cuid())
+  name     String @unique
+  image    String
+  blogBody String
+  tags     Tag[]
+  user     User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+}
+
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+  blogs Blog[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Testimonies {
+  id            String      @id @default(cuid())
+  name          String      @unique
+  image         String
+  type          ServiceType @relation(fields: [serviceTypeId], references: [id])
+  testimonyBody String
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  serviceTypeId String
+}
+
+model Business {
+  id      String @id @default(cuid())
+  name    String @unique
+  logo    String
+  email   String
+  address String
+  phone   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
