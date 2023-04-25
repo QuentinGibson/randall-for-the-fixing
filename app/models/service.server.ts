@@ -23,3 +23,18 @@ export async function getServicesByCategory(category: string) {
   }
   return services
 }
+
+export async function createService(data: any) {
+  const service = await prisma.service.create({ data });
+  if (!service) {
+    throw new Error("Service not created");
+  }
+  return { service , message: "Service created successfully" }
+}
+export async function deleteService(id: string) {
+  const service = await prisma.service.delete({ where: { id } });
+  if (!service) {
+    throw new Error("Service not deleted");
+  }
+  return { service , message: "Service deleted successfully" }
+}
