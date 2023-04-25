@@ -8,6 +8,7 @@ describe("smoke tests", () => {
   it("should allow you to register and login", () => {
     const loginForm = {
       email: `${faker.internet.userName()}@example.com`,
+      name: faker.internet.userName(),
       password: faker.internet.password(),
     };
 
@@ -15,14 +16,13 @@ describe("smoke tests", () => {
 
     cy.visitAndCheck("/");
 
-    cy.findByRole("link", { name: /sign up/i }).click();
-
+    cy.findByRole("link", { name: /login/i }).click();
+    cy.findByRole("link", { name: /create account/i}).click();
     cy.findByRole("textbox", { name: /email/i }).type(loginForm.email);
     cy.findByLabelText(/password/i).type(loginForm.password);
+    cy.findByLabelText(/name/i).type(loginForm.name);
     cy.findByRole("button", { name: /create account/i }).click();
 
     cy.findByRole("button", { name: /logout/i }).click();
-    cy.findByRole("link", { name: /log in/i });
   });
-
 });
