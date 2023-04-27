@@ -34,6 +34,26 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <script src="assets/js/vendor/jquery.js"></script>
+        <script src="assets/js/vendor/waypoints.js"></script>
+        <script src="assets/js/bootstrap-bundle.js"></script>
+        <script src="assets/js/meanmenu.js"></script>
+        <script src="assets/js/swiper-bundle.js"></script>
+        <script src="assets/js/splide.js"></script>
+        <script src="assets/js/slick.min.js"></script>
+        <script src="assets/js/nouislider.js"></script>
+        <script src="assets/js/magnific-popup.js"></script>
+        <script src="assets/js/nice-select.js"></script>
+        <script src="assets/js/wow.js"></script>
+        <script src="assets/js/datepicker.js"></script>
+        <script src="assets/js/isotope-pkgd.js"></script>
+        <script src="assets/js/imagesloaded-pkgd.js"></script>
+        <script src="assets/js/jquery.appear.js"></script>
+        <script src="assets/js/jquery.knob.js"></script>
+        <script src="assets/js/circularProgressBar.min.js"></script>
+        <script src="assets/js/purecounter.js"></script>
+        <script src="assets/js/ajax-form.js"></script>
+        <script src="assets/js/main.js"></script>
       </body>
     </html>
   );
