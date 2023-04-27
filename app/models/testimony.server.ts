@@ -1,7 +1,7 @@
 import { prisma } from "~/db.server";
 
 export async function getTestimonies() {
-  const testimonies = prisma.testimony.findMany();
+  const testimonies = await prisma.testimony.findMany();
   if (!testimonies) {
     throw new Error("No testimonies found");
   }

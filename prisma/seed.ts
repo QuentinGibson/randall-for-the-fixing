@@ -1,10 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import {faker} from '@faker-js/faker'
 
 const prisma = new PrismaClient();
 
 async function seed() {
-  const email = "rachel@remix.run";
+  const email = "antherone@remix.run";
 
   // cleanup the existing database
   await prisma.user.delete({ where: { email } }).catch(() => {
@@ -26,7 +27,7 @@ async function seed() {
 
   await prisma.business.create({
     data: {
-      name: "Rachel's Business",
+      title: "Rachel's Business",
       logo: "https://picsum.photos/200",
       phone: "123-456-7890",
       address: "123 Main St",
@@ -35,12 +36,12 @@ async function seed() {
   })
   const fastReadTag = await prisma.tag.create({
     data: {
-      name: "Fast Read"
+      title: "Fast Read"
     }
   })
   const blogTag = await prisma.tag.create({
     data: {
-      name: "blog"
+      title: "blog"
     }
   })
   await prisma.blog.create({
@@ -56,26 +57,28 @@ async function seed() {
   })
   const commercialType = await prisma.serviceType.create({
     data: {
-      name: "Commercial"
+      title: "Commercial"
     }
   })
   const residentialType = await prisma.serviceType.create({
     data: {
-      name: "Residential"
+      title: "Residential"
     }
   })
+  const firstTestimonyName = `${faker.name.firstName()} ${faker.name.lastName()}`
   await prisma.testimony.create({
     data: {
-      name: "Rachel's Testimony",
+      title: firstTestimonyName,
       image: "https://picsum.photos/200",
       testimonyBody: "This is a testimony",
       type: { connect: { id: residentialType.id } },
     }
   })
 
+  const secondTestimonyName = `${faker.name.firstName()} ${faker.name.lastName()}`
   await prisma.testimony.create({
     data: {
-      name: "Rachel's Testimony",
+      title: secondTestimonyName,
       image: "https://picsum.photos/200",
       testimonyBody: "This is a testimony",
       type: { connect: { id: residentialType.id } },
@@ -87,13 +90,14 @@ async function seed() {
       title: "Driveways",
       image: "https://picsum.photos/200",
       serviceDescription: "This service",
+      type: { connect: { id: residentialType.id } },
       subtext: "This is a subtext",
       serviceCta: "This is a service cta",
       serviceFiller: "This is a service filler",
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        title: faker.lorem.words(4)
         }
       }
     }, {
@@ -107,7 +111,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        title: faker.lorem.words(4)
         }
       }
     }, {
@@ -121,7 +125,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        title: faker.lorem.words(4)
         }
       }
     },{
@@ -135,7 +139,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        title: faker.lorem.words(4)
         }
       }
     },{
@@ -149,7 +153,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        title: faker.lorem.words(4)
         }
       }
     },{
@@ -163,7 +167,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        title: faker.lorem.words(4)
         }
       }
     },{
@@ -177,7 +181,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        title: faker.lorem.words(4)
         }
       }
     },{
@@ -191,7 +195,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        title: faker.lorem.words(4)
         }
       }
     }
