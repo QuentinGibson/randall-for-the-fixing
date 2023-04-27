@@ -1,4 +1,3 @@
-
 export default function FunFact() {
   return (
     <section className="tp-counter-2-area p-relative">
