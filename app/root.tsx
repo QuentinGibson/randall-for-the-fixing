@@ -1,4 +1,5 @@
 import type { LinksFunction, LoaderArgs } from "@remix-run/node";
+import { cssBundleHref } from "@remix-run/css-bundle";
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -12,10 +13,14 @@ import {
 import { getUser } from "~/session.server";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
 
-// import '@splidejs/react-splide/css'
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: tailwindStylesheetUrl },
-];
+export const links: LinksFunction = () => {
+  return [
+    ...(cssBundleHref
+      ? [{ rel: "stylesheet", href: cssBundleHref }]
+      : []),
+    { rel: "stylesheet", href: tailwindStylesheetUrl }
+  ]
+};
 
 export const loader = async ({ request }: LoaderArgs) => {
   return json({ user: await getUser(request) });
