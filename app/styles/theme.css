@@ -1,6 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+
+.yellow-block::before {
+  position:absolute;
+  height: 100%;
+  content: "";
+  background-color: yellow;
+  width: 10px;
+  top: 0;
+  left: 0;
+}
+.blue-block::before {
+  position:absolute;
+  height: 100%;
+  content: "";
+  background-color: blue;
+  width: 10px;
+  top: 0;
+  left: 0;
+}
 @font-face {
   font-family: 'Outfit';
-  src: url('/fonts/outfit/Outfit-Regular`.ttf') format('truetype');
+  src: url('/fonts/outfit/Outfit-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

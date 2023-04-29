@@ -1,10 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { searchForWorkspaceRoot } from "vite";
+import {faker} from "@faker-js/faker"
 
 const prisma = new PrismaClient();
 
 async function seed() {
-  const email = "rachel@remix.run";
+  const email = "random@remix.run";
 
   // cleanup the existing database
   await prisma.user.delete({ where: { email } }).catch(() => {
@@ -26,7 +28,7 @@ async function seed() {
 
   await prisma.business.create({
     data: {
-      name: "Rachel's Business",
+      name: faker.name.fullName(),
       logo: "https://picsum.photos/200",
       phone: "123-456-7890",
       address: "123 Main St",
@@ -66,7 +68,7 @@ async function seed() {
   })
   await prisma.testimony.create({
     data: {
-      name: "Rachel's Testimony",
+      name: faker.name.fullName(),
       image: "https://picsum.photos/200",
       testimonyBody: "This is a testimony",
       type: { connect: { id: residentialType.id } },
@@ -75,7 +77,7 @@ async function seed() {
 
   await prisma.testimony.create({
     data: {
-      name: "Rachel's Testimony",
+      name: faker.name.fullName(),
       image: "https://picsum.photos/200",
       testimonyBody: "This is a testimony",
       type: { connect: { id: residentialType.id } },
@@ -86,6 +88,7 @@ async function seed() {
     {
       title: "Driveways",
       image: "https://picsum.photos/200",
+      type: { connect: { id: residentialType.id } },
       serviceDescription: "This service",
       subtext: "This is a subtext",
       serviceCta: "This is a service cta",
@@ -93,7 +96,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        name: faker.lorem.words()
         }
       }
     }, {
@@ -107,7 +110,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        name: faker.lorem.words()
         }
       }
     }, {
@@ -121,7 +124,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        name: faker.lorem.words()
         }
       }
     },{
@@ -135,7 +138,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        name: faker.lorem.words()
         }
       }
     },{
@@ -149,7 +152,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        name: faker.lorem.words()
         }
       }
     },{
@@ -163,7 +166,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        name:faker.lorem.words()
         }
       }
     },{
@@ -177,7 +180,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        name: faker.lorem.words()
         }
       }
     },{
@@ -191,7 +194,7 @@ async function seed() {
       gallery: {
         create: {
         image: "https://picsum.photos/200",
-        name: "Rachel's Gallery"
+        name: faker.lorem.words(),
         }
       }
     }
