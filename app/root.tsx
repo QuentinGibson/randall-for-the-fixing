@@ -12,6 +12,7 @@ import {
 import { getUser } from "~/session.server";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
 
+// import '@splidejs/react-splide/css'
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStylesheetUrl },
 ];
