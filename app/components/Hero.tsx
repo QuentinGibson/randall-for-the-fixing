@@ -2,6 +2,7 @@ import { Link } from '@remix-run/react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay'
 import { useCallback, useRef } from 'react';
+import Bubbles from './Bubbles';
 
 interface Slide {
   pre: string,
@@ -29,16 +30,6 @@ const slides: Slide[] = [
     }
   },
   {
-    pre: "Commercial Cleaning Solution",
-    header: "Say goodbye to dirt and grime",
-    desc: "In addition to keeping your property looking great, we also prioritize safety and sanitation. Our expert grease trap and sidewalk pressure washing services can help prevent slips, falls, and accidents on your property. We use safe and effective techniques to ensure your property remains clean and hygienic for your employees and customers.",
-    cta: { content: "Commercial Services", url: "/services/commercial" },
-    image: {
-      url: "assets/img/hero/home-2/img-2.webp",
-      altText: "A grey clean home that has been cleaned"
-    }
-  },
-  {
     pre: "Greese Trap Cleaning",
     header: "Keep Your Business Safe and Sanitary",
     desc: "In addition to keeping your property looking great, we also prioritize safety and sanitation. Our expert grease trap and sidewalk pressure washing services can help prevent slips, falls, and accidents on your property. We use safe and effective techniques to ensure your property remains ",
@@ -47,25 +38,38 @@ const slides: Slide[] = [
       url: "assets/img/hero/home-2/img-3.webp",
       altText: "A clean side of a company building. This side has been pressure washed"
     }
-  }
+  },
+  {
+    pre: "Commercial Cleaning Solution",
+    header: "Say goodbye to all that dirt and grime",
+    desc: "In addition to keeping your property looking great, we also prioritize safety and sanitation. Our expert grease trap and sidewalk pressure washing services can help prevent slips, falls, and accidents on your property. We use safe and effective techniques to ensure your property remains clean and hygienic for your employees and customers.",
+    cta: { content: "Commercial Services", url: "/services/commercial" },
+    image: {
+      url: "assets/img/hero/home-2/img-2.webp",
+      altText: "A grey clean home that has been cleaned"
+    }
+  },
 ]
 
 const createSplideSlides = (slides: Slide[]) => {
   function create(slide: Slide, index: number) {
     const { pre, header, cta, desc, image } = slide
     return (
-      <div className='md:pl-16 grow-0 shrink-0 basis-full bg-blue-700' key={index}>
+      <div className='md:pl-16 grow-0 shrink-0 basis-full' key={index}>
         <div className="md:grid md:grid-cols-2 py-8 px-4">
-          <div className="flex gap-4 flex-col justify-center">
-            <p className="pre">{pre}</p>
-            <p className="header">{header}</p>
-            <p className="desc">{desc}</p>
+          <div className="flex gap-4 flex-col justify-center text-white">
+            <div className='flex items-center'>
+              <div className="w-4 h-1 bg-yellow-300 mr-2 "></div>
+              <p className="pre font-bold text-base">{pre}</p>
+            </div>
+            <p className="header font-bold  text-5xl leading-tight tracking-wide transition-opacity">{header}</p>
+            <p className="desc ">{desc}</p>
             <div className='flex'>
-              <Link to={cta.url} className="cta px-6 py-2 bg-blue-500">{cta.content}</Link>
+              <Link to={cta.url} className="cta px-6 py-2 bg-slate-900">{cta.content}</Link>
             </div>
           </div>
-          <div className='mt-10'>
-            <img src={image.url} alt={image.altText} />
+          <div className='mt-10 h-[260px] relative'>
+            <img className='object-fill w-full h-full' src={image.url} alt={image.altText} />
           </div>
         </div>
       </div>
@@ -95,6 +99,7 @@ export default function Hero() {
         <button className="z-10 bg-green-400 p-6" onClick={scrollPrev}>Prev</button>
         <button className="z-10 bg-green-400 p-6" onClick={scrollNext}>Next</button>
       </div>
+      <Bubbles />
     </div>
   );
 };

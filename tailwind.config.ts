@@ -9,7 +9,11 @@ export default {
       },
       fontWeight: {
         bold: 'bold'
+      },
+      animation: {
+        'bubble-rise': 'bubblerise 4s infinite ease-in'
       }
+
     },
   },
   plugins: [],
