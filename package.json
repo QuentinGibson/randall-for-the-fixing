@@ -29,7 +29,6 @@
     "/public/build"
   ],
   "dependencies": {
-    "@fontsource/outfit": "^4.5.11",
     "@prisma/client": "^4.12.0",
     "@remix-run/css-bundle": "^1.15.0",
     "@remix-run/node": "*",

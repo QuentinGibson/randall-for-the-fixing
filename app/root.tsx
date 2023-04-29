@@ -12,13 +12,15 @@ import {
 
 import { getUser } from "~/session.server";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
+import themeStylesheetUrl from "~/styles/theme.css"
 
 export const links: LinksFunction = () => {
   return [
     ...(cssBundleHref
       ? [{ rel: "stylesheet", href: cssBundleHref }]
       : []),
-    { rel: "stylesheet", href: tailwindStylesheetUrl }
+    { rel: "stylesheet", href: tailwindStylesheetUrl },
+    { rel: "stylesheet", href: themeStylesheetUrl }
   ]
 };
 
