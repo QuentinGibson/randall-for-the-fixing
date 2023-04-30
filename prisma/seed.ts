@@ -206,15 +206,63 @@ async function seed() {
     })
   })
 
-  const project = await prisma.project.create({
-    data: {
-      title: "Rachel's Project",
-      image: "https://picsum.photos/200",
-      service: { connect: {title: "Driveways"}  },
-      projectBody: "This is a project",
+  const drivewayId = await prisma.service.findUnique({
+    where: {
+      title: "Driveways"
     }
-  })
+  }).then((service) => service?.id)
 
+  const backyardId = await prisma.service.findUnique({
+    where: {
+      title: "Backyards"
+    }
+  }).then((service) => service?.id)
+
+  const homeId = await prisma.service.findUnique({
+    where: {
+      title: "Homes"
+    }
+  }).then((service) => service?.id)
+
+  const officeId = await prisma.service.findUnique({
+    where: {
+      title: "Office Buildings"
+    }
+  }).then((service) => service?.id)
+
+  const projects = [
+    {
+      title: faker.lorem.words(),
+      image: "https://picsum.photos/200",
+      service: { connect: {id: drivewayId} },
+      projectBody: faker.lorem.words(100)
+    }, {
+      title: faker.lorem.words(),
+      image: "https://picsum.photos/200",
+      service: { connect: {id: homeId} },
+      projectBody: faker.lorem.words(100)
+    },{
+      title: faker.lorem.words(),
+      image: "https://picsum.photos/200",
+      service: { connect: {id: homeId} },
+      projectBody: faker.lorem.words(100)
+    }, {
+      title: faker.lorem.words(),
+      image: "https://picsum.photos/200",
+      service: { connect: {id: officeId} },
+      projectBody: faker.lorem.words(100)
+    }, {
+      title: faker.lorem.words(),
+      image: "https://picsum.photos/200",
+      service: { connect: {id: officeId} },
+      projectBody: faker.lorem.words(100)
+    }
+  ]
+  projects.forEach(async (project) => {
+    await prisma.project.create({
+      data: project
+    })
+  })
 
   console.log(`Database has been seeded. 🌱`);
 }
