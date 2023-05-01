@@ -23,38 +23,40 @@ export const loader = async ({ request, params }: LoaderArgs) => {
   return json({ services, projects, testimonials, blog })
 };
 export default function Index() {
-  const [emblaRef] = useEmblaCarousel();
-  const [projectEmblaRef] = useEmblaCarousel();
+  const [emblaRef] = useEmblaCarousel({ loop: true });
+  const [projectEmblaRef] = useEmblaCarousel({ loop: true });
   const [testimonyEmblaRef] = useEmblaCarousel();
   const [blogEmblaRef] = useEmblaCarousel();
   const { services, projects, testimonials, blog } = useLoaderData<typeof loader>()
   return (
     <>
       <Hero />
-      <div className="px-8 py-24">
+      <div className="px-8 py-24 md:flex md:justify-evenly">
         <QuoteForm services={services} />
         <Badges />
       </div>
       <section className="bg-blue-200 py-24 px-8">
-        <div className="flex flex-col gap-8">
-          <div className="flex">
-            <div className="bg-gradient-to-r from-yellow-400 to-transparent text-sm py-2 pl-6 pr-6 blue-block relative">
-              <p className="font-bold tracking-wide text-sm">About Our Company</p>
+        <div className="flex flex-col gap-8 md:flex-row">
+          <div className="flex flex-col gap-3">
+            <div className="flex">
+              <div className="bg-gradient-to-r from-yellow-400 to-transparent text-sm py-2 pl-6 pr-6 blue-block relative">
+                <p className="font-bold tracking-wide text-sm">About Our Company</p>
+              </div>
+            </div>
+            <h3 className="font-bold text-5xl uppercase">Great Service at Unbelievable Prices</h3>
+            <p className="text-base text-gray-600">We pressure wash and clean tough spots and grime until they vanish.</p>
+            <div className="w-24 h-24 rounded-full bg-white shadow hover:shadow-lg transform hover:translate-y-1 transition duration-300 flex items-center justify-center">
+              <BsAward className="w-10 h-10 rounded" />
+            </div>
+            <p className="font-bold text-2xl">Award Winning</p>
+            <div>
+              <button className="flex items-center bg-yellow-400 px-10 py-4">Our Services<BsArrowRight className="ml-1" /></button>
             </div>
           </div>
-          <h3 className="font-bold text-5xl uppercase">Great Service at Unbelievable Prices</h3>
-          <p className="text-base text-gray-600">We pressure wash and clean tough spots and grime until they vanish.</p>
-          <div className="w-24 h-24 rounded-full bg-white shadow hover:shadow-lg transform hover:translate-y-1 transition duration-300 flex items-center justify-center">
-            <BsAward className="w-10 h-10 rounded" />
-          </div>
-          <p className="font-bold text-2xl">Award Winning</p>
-          <div>
-            <button className="flex items-center bg-yellow-400 px-10 py-4">Our Services<BsArrowRight className="ml-1" /></button>
-          </div>
           <div className="grid grid-cols-2 grid-rows-2 gap-4">
-            <div className="bg-gray-200 h-full"><img src="assets/img/about/home-2/img-1.webp" className="h-[200px]" alt="A dirty concert driveway" /></div>
-            <div className="bg-gray-200 h-full"><img src="assets/img/about/home-2/img-2.webp" className="h-[200px]" alt="A clean version of the dirty driveway" /></div>
-            <div className="bg-gray-400 h-full col-span-2"><img src="assets/img/about/home-2/img-3.webp" className="h-[200px]" alt="" /></div>
+            <div className="bg-gray-200 h-full"><img src="assets/img/about/home-2/img-1.webp" className="h-[200px] object-fill" alt="A dirty concert driveway" /></div>
+            <div className="bg-gray-200 h-full"><img src="assets/img/about/home-2/img-2.webp" className="h-[200px] object-fill" alt="A clean version of the dirty driveway" /></div>
+            <div className="bg-gray-400 h-full col-span-2"><img src="assets/img/about/home-2/img-3.webp" className="h-[200px] object-fill" alt="" /></div>
           </div>
         </div>
       </section>
@@ -71,7 +73,7 @@ export default function Index() {
               {services.map(service => {
                 const { image } = service
                 return (
-                  <div className="grow-0 shrink-0 basis-full">
+                  <div className="grow-0 shrink-0 basis-full md:basis-1/3 md:grow md:mr-4">
                     <div className="bg-gray-100 text-black">
                       <div className="px-4 pb-8 py-4 flex flex-col gap-8">
                         <div className="relative">
@@ -106,10 +108,10 @@ export default function Index() {
             </div>
           </div>
           <h3 className="text-3xl font-bold uppercase">Recent Work Showcase</h3>
-          <section className="overflow-hidden h-[360px]" ref={projectEmblaRef}>
+          <section className="overflow-hidden h-[360px] md:select-none md:h-[400px]" ref={projectEmblaRef}>
             <div className="flex">
               {projects.map(project => (
-                <div className="grow-0 shrink-0 basis-full mr-8">
+                <div className="grow-0 shrink-0 basis-full mr-8 md:basis-[500px]">
                   <div className="relative w-full h-full">
                     <img className="w-full h-full object-fill" src={project.image} alt="" />
                     <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-t from-blue-500 to-transparent flex items-end px-6 py-4">

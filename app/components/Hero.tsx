@@ -3,6 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay'
 import { useCallback, useRef } from 'react';
 import Bubbles from './Bubbles';
+import { BsArrowLeft, BsArrowRight, BsArrowRightCircle } from 'react-icons/bs';
 
 interface Slide {
   pre: string,
@@ -56,7 +57,7 @@ const createSplideSlides = (slides: Slide[]) => {
     const { pre, header, cta, desc, image } = slide
     return (
       <div className='md:pl-16 grow-0 shrink-0 basis-full' key={index}>
-        <div className="md:grid md:grid-cols-2 py-8 px-4">
+        <div className="md:grid md:grid-cols-2 py-8 px-4 md:gap-14">
           <div className="flex gap-4 flex-col justify-center text-white">
             <div className='flex items-center'>
               <div className="w-4 h-1 bg-yellow-300 mr-2 "></div>
@@ -68,7 +69,7 @@ const createSplideSlides = (slides: Slide[]) => {
               <Link to={cta.url} className="cta px-6 py-2 bg-slate-900">{cta.content}</Link>
             </div>
           </div>
-          <div className='mt-10 h-[260px] relative'>
+          <div className='mt-10 h-[260px] relative md:max-w-sm'>
             <img className='object-fill w-full h-full' src={image.url} alt={image.altText} />
           </div>
         </div>
@@ -89,15 +90,15 @@ export default function Hero() {
     if (emblaApi) emblaApi.scrollPrev()
   }, [emblaApi])
   return (
-    <div className='relative pt-[100px] overflow-hidden'>
+    <div className='relative pt-[100px] overflow-hidden md:pb-[100px]'>
       <div className='overflow-hidden' ref={emblaRef} aria-label='Our Sales Pitches'>
         <div className="flex">
           {SplideSlides}
         </div>
       </div>
       <div className='hidden md:absolute top-1/3 md:flex flex-col gap-4'>
-        <button className="z-10 bg-green-400 p-6" onClick={scrollPrev}>Prev</button>
-        <button className="z-10 bg-green-400 p-6" onClick={scrollNext}>Next</button>
+        <button className="z-10 bg-blue-400 p-6 hover: scale-105 cursor-pointer" onClick={scrollPrev}><BsArrowLeft /></button>
+        <button className="z-10 bg-blue-400 p-6 hover: scale-105 cursor-pointer" onClick={scrollNext}><BsArrowRight /></button>
       </div>
       <Bubbles />
     </div>

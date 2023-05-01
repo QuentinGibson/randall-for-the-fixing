@@ -5,7 +5,7 @@ import { BsArrowDown, BsArrowRight, BsCaretDown, BsCaretDownFill } from 'react-i
 
 export default function QuoteForm({ services }: { services: any[] }) {
   return (
-    <section id="QuoteForm" className="flex flex-col bg-blue-200">
+    <section id="QuoteForm" className="flex flex-col bg-blue-200 md:max-w-md md:mt-[-180px]">
       <div className="px-6 py-16">
         <div className="flex flex-col">
           <div className="flex">

@@ -23,7 +23,7 @@ interface ServiceType {
 }
 
 export default function Header({ business, services, projects }: { business: Business, services: Service[], projects: any }) {
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
