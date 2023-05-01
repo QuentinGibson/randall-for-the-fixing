@@ -1,9 +1,8 @@
+import invariant from "tiny-invariant";
 import { prisma } from "~/db.server";
 export async function getBusinessById(id: string) {
-  const business = prisma.business.findUnique({ where: { id } });
-  if (!business) {
-    throw new Error("Business not found");
-  }
+  const business = await prisma.business.findUnique({ where: { id } });
+  invariant(business, "Business not found")
   return { business , message: "Business found successfully"}
 }
 

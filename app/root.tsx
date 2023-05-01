@@ -8,11 +8,16 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 
 import { getUser } from "~/session.server";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
 import themeStylesheetUrl from "~/styles/theme.css"
+import Layout from "./components/Layout";
+import { getBusinessById, getIdForFirstBusiness } from "./models/business.server";
+import { getAllServices } from "./models/service.server";
+import { getProjects } from "./models/project.server";
 
 export const links: LinksFunction = () => {
   return [
@@ -25,10 +30,15 @@ export const links: LinksFunction = () => {
 };
 
 export const loader = async ({ request }: LoaderArgs) => {
-  return json({ user: await getUser(request) });
+  const firstBusinessId = await getIdForFirstBusiness().then(res => res.businessID)
+  const business = await getBusinessById(firstBusinessId).then(res => res.business)
+  const services = await getAllServices();
+  const projects = await getProjects()
+  return json({ user: await getUser(request), business, services, projects });
 };
 
 export default function App() {
+  const { business, services, projects } = useLoaderData<typeof loader>();
   return (
     <html lang="en" className="h-full">
       <head>
@@ -38,7 +48,11 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full">
-        <Outlet />
+        <Layout business={business} services={services} projects={projects}>
+          <div>
+            <Outlet />
+          </div>
+        </Layout>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

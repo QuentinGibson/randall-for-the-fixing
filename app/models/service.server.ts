@@ -16,6 +16,9 @@ export async function getServicesByCategory(category: string) {
   const services = prisma.service.findMany({
     where: {
       type: {name: category}},
+    include: {
+      type: true
+    }
     },
   );
   if (!services) {

@@ -8,8 +8,18 @@ export async function getProjectById(id:string) {
   return project
 }
 
+
 export async function getProjects() {
-  const projects = await prisma.project.findMany();
+  const projects = await prisma.project.findMany({
+    include: {
+      service: {
+        include: {
+          type: true,
+        }
+      },
+
+    }
+  });
   if (!projects) {
     throw new Error("No projects found");
   }

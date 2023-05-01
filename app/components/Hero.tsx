@@ -89,7 +89,7 @@ export default function Hero() {
     if (emblaApi) emblaApi.scrollPrev()
   }, [emblaApi])
   return (
-    <div className='relative'>
+    <div className='relative pt-[100px] overflow-hidden'>
       <div className='overflow-hidden' ref={emblaRef} aria-label='Our Sales Pitches'>
         <div className="flex">
           {SplideSlides}

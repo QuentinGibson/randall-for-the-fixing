@@ -1,4 +1,4 @@
-import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
+import { LoaderArgs, V2_MetaFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import Header from "~/components/Header";
 import Hero from "~/components/Hero";
@@ -20,7 +20,7 @@ export const loader = async ({ request, params }: LoaderArgs) => {
   const projects = await getProjects();
   const testimonials = await getTestimonies().then(testimonies => testimonies.testimonies);
   const blog = await getBlogs().then(blogs => blogs.blogs);
-  return { services, projects, testimonials, blog }
+  return json({ services, projects, testimonials, blog })
 };
 export default function Index() {
   const [emblaRef] = useEmblaCarousel();
@@ -30,7 +30,6 @@ export default function Index() {
   const { services, projects, testimonials, blog } = useLoaderData<typeof loader>()
   return (
     <>
-      <Header />
       <Hero />
       <div className="px-8 py-24">
         <QuoteForm services={services} />
@@ -198,7 +197,6 @@ export default function Index() {
                     </div>
                   </div>
                 )
-
               })}
             </div>
           </div>

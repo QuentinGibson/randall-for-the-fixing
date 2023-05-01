@@ -20,6 +20,9 @@
   top: 0;
   left: 0;
 }
+.nav-list-item:last-of-type {
+  border-bottom: 0;
+}
 @font-face {
   font-family: 'Outfit';
   src: url('/fonts/outfit/Outfit-Regular.ttf') format('truetype');
