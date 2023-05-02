@@ -47,7 +47,7 @@ export default function Index() {
                 <p className="font-bold tracking-wide text-sm">About Our Company</p>
               </div>
             </div>
-            <h3 className="font-bold text-5xl uppercase">Great Service at Unbelievable Prices</h3>
+            <h3 className="font-bold text-xl md:text-4xl uppercase">Great Service at Unbelievable Prices</h3>
             <p className="text-base text-gray-600">We pressure wash and clean tough spots and grime until they vanish.</p>
             <div className="w-24 h-24 rounded-full bg-white shadow hover:shadow-lg transform hover:translate-y-1 transition duration-300 flex items-center justify-center">
               <BsAward className="w-10 h-10 rounded" />
@@ -120,8 +120,8 @@ export default function Index() {
                     <img className="w-full h-full object-fill" src={project.image} alt="" />
                     <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-t from-blue-500 to-transparent flex items-end px-6 py-4">
                       <div className="w-full">
-                        <div className="flex justify-between">
-                          <div className="flex flex-col">
+                        <div className="flex justify-between gap-6">
+                          <div className="flex flex-col break-all">
                             <p className="text-white text-xl font-bold uppercase">
                               {project.title}
                             </p>
@@ -129,8 +129,8 @@ export default function Index() {
                               {project.serviceId}
                             </p>
                           </div>
-                          <div className="flex">
-                            <div className="bg-yellow-300 w-16 flex justify-center items-center"><BsArrowUpRight className="text-4xl" /></div>
+                          <div className="flex items-center">
+                            <button className="h-[70px] appearance-none bg-yellow-300 w-16 flex justify-center items-center"><BsArrowUpRight className="text-4xl" /></button>
                           </div>
                         </div>
                       </div>
@@ -178,7 +178,7 @@ export default function Index() {
             </div>
           </div>
           <h3 className="font-bold text-3xl uppercase text-center mt-12">Latest Blog and Article</h3>
-          <div className="md:grid md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_3fr] gap-4">
+          <div className="grid md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_3fr] gap-4">
             <div className="p-8 bg-gray-100">
               <div className="h-full flex flex-col justify-evenly py-8 px-8" style={{ background: "url('/assets/svg/blob-background.svg') repeat center center / 50px" }}>
                 <p className="bg-black px-4 py-2 font-bold text-white text-2xl">Get Started With Your Free Estimate.</p>

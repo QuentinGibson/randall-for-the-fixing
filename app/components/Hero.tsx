@@ -57,7 +57,7 @@ const createSplideSlides = (slides: Slide[]) => {
     const { pre, header, cta, desc, image } = slide
     return (
       <div className='md:pl-16 grow-0 shrink-0 basis-full' key={index}>
-        <div className="md:grid md:grid-cols-2 py-8 px-4 md:gap-14">
+        <div className="grid md:grid-cols-2 py-8 px-4 gap-8 md:gap-14 ">
           <div className="flex gap-4 flex-col justify-center text-white">
             <div className='flex items-center'>
               <div className="w-4 h-1 bg-yellow-300 mr-2 "></div>
