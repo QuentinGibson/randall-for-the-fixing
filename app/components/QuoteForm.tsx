@@ -5,7 +5,7 @@ import { BsArrowDown, BsArrowRight, BsCaretDown, BsCaretDownFill } from 'react-i
 
 export default function QuoteForm({ services }: { services: any[] }) {
   return (
-    <section id="QuoteForm" className="flex flex-col bg-blue-200 md:max-w-md md:mt-[-180px]">
+    <section id="QuoteForm" style={{ background: "url(\"/assets/svg/layered-background.svg\") bottom center / 500px" }} className="flex flex-col bg-blue-200 md:max-w-md md:mt-[-180px]">
       <div className="px-6 py-16">
         <div className="flex flex-col">
           <div className="flex">
@@ -18,13 +18,13 @@ export default function QuoteForm({ services }: { services: any[] }) {
             <div className="relative mt-2 ">
               <select className="w-full px-2 py-3 appearance-none bg-white border border-gray-300 rounded" name="service" id="services">
                 <option value="Choose a Service:">Choose a Service:</option>
-                {services.map(service => <option value={service.title}>{service.title}</option>)}
+                {services.map(service => <option value={service.title} key={service.id}>{service.title}</option>)}
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <BsCaretDownFill />
               </div>
             </div>
-            <textarea className="w-full mt-2 px-2 py-3" placeholder="Write a message" name="message" id="message"></textarea>
+            <textarea className="w-full mt-2 px-2 py-3 resize-none" placeholder="Write a message" name="message" id="message"></textarea>
             <button className="flex items-center bg-slate-900 text-white py-2 px-2 mt-4">Submit Now<BsArrowRight className="ml-1" /></button>
           </Form>
         </div>

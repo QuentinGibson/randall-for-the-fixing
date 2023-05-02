@@ -1,5 +1,5 @@
 import { LoaderArgs, V2_MetaFunction, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import Header from "~/components/Header";
 import Hero from "~/components/Hero";
 import QuoteForm from "../components/QuoteForm";
@@ -10,10 +10,14 @@ import useEmblaCarousel from "embla-carousel-react";
 import { getProjects } from "~/models/project.server";
 import Fact from "~/components/Fact";
 import { getTestimonies } from "~/models/testimony.server";
-import { getBlogById, getBlogs } from "~/models/blog.server";
+import { getBlogs } from "~/models/blog.server";
 
 export const meta: V2_MetaFunction = () => [{ title: "Randall's for the Fixing" }];
 
+function trim(string: string, amount: number) {
+  if (string.length <= amount) return string
+  return string.slice(0, amount) + '...'
+}
 
 export const loader = async ({ request, params }: LoaderArgs) => {
   const services = await getAllServices();
@@ -25,8 +29,8 @@ export const loader = async ({ request, params }: LoaderArgs) => {
 export default function Index() {
   const [emblaRef] = useEmblaCarousel({ loop: true });
   const [projectEmblaRef] = useEmblaCarousel({ loop: true });
-  const [testimonyEmblaRef] = useEmblaCarousel();
-  const [blogEmblaRef] = useEmblaCarousel();
+  const [testimonyEmblaRef] = useEmblaCarousel({ loop: true });
+  const [blogEmblaRef] = useEmblaCarousel({ loop: true });
   const { services, projects, testimonials, blog } = useLoaderData<typeof loader>()
   return (
     <>
@@ -53,10 +57,10 @@ export default function Index() {
               <button className="flex items-center bg-yellow-400 px-10 py-4">Our Services<BsArrowRight className="ml-1" /></button>
             </div>
           </div>
-          <div className="grid grid-cols-2 grid-rows-2 gap-4">
-            <div className="bg-gray-200 h-full"><img src="assets/img/about/home-2/img-1.webp" className="h-[200px] object-fill" alt="A dirty concert driveway" /></div>
-            <div className="bg-gray-200 h-full"><img src="assets/img/about/home-2/img-2.webp" className="h-[200px] object-fill" alt="A clean version of the dirty driveway" /></div>
-            <div className="bg-gray-400 h-full col-span-2"><img src="assets/img/about/home-2/img-3.webp" className="h-[200px] object-fill" alt="" /></div>
+          <div className="grid grid-cols-2 grid-rows-2 gap-4 relative">
+            <div className="bg-gray-200 h-full"><img src="assets/img/about/home-2/img-1.webp" className="`h-full object-fill" alt="A dirty concert driveway" /></div>
+            <div className="bg-gray-200 h-full"><img src="assets/img/about/home-2/img-2.webp" className="h-full object-fill" alt="A clean version of the dirty driveway" /></div>
+            <div className="bg-gray-400 h-full col-span-2"><img src="assets/img/about/home-2/img-3.webp" className="h-full object-fill" alt="" /></div>
           </div>
         </div>
       </section>
@@ -71,25 +75,25 @@ export default function Index() {
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {services.map(service => {
-                const { image } = service
+                const { image, id } = service
                 return (
-                  <div className="grow-0 shrink-0 basis-full md:basis-1/3 md:grow md:mr-4">
-                    <div className="bg-gray-100 text-black">
-                      <div className="px-4 pb-8 py-4 flex flex-col gap-8">
+                  <div className="grow-0 shrink-0 basis-full md:basis-[280px] md:grow md:mr-8" key={id}>
+                    <div className="bg-gray-200 text-black">
+                      <div className="px-4 pb-8 py-4 flex flex-col gap-4">
                         <div className="relative">
-                          <div className="h-[220px] w-full relative">
-                            <img src={image} alt="" className="h-full w-full object-fill" />
+                          <div className="h-[220px] w-full relative flex flex-col gap-4">
+                            <img src={image} alt="" className="w-full object-fill h-[200px]" />
                             <div className="relative bottom-12 w-full flex justify-center">
-                              <div className="w-24 h-24 rounded-full bg-white shadow hover:shadow-lg transform hover:translate-y-1 transition duration-300 flex items-center justify-center text-black">
+                              <div className="w-16 h-16 rounded-full bg-white shadow hover:shadow-lg transform hover:-translate-y-1 transition duration-300 flex items-center justify-center text-black">
                                 <BsAward className="w-10 h-10 rounded" />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <h4 className="mt-12 font-bold text-xl">{service.title}</h4>
-                        <p>{service.serviceDescription}</p>
+                        <h4 className=" font-bold text-xl">{service.title}</h4>
+                        <p className="basis-[80px]">{trim(service.subtext, 80)}</p>
                         <div className="flex">
-                          <button className="py-1 px-3 bg-slate-200 flex items-center text-black">Details<BsArrowRight className="ml-2" /></button>
+                          <button className="py-1 px-3 bg-blue-800 flex items-center text-black">Details<BsArrowRight className="ml-2" /></button>
                         </div>
                       </div>
                     </div>
@@ -101,18 +105,18 @@ export default function Index() {
         </div>
       </section>
       <section className="py-24 px-8">
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-10">
           <div className="flex">
             <div className="bg-gradient-to-r from-yellow-400 to-transparent text-sm py-2 pl-6 pr-6 blue-block relative">
               <p className="font-bold tracking-wide text-sm">Our Portfolio</p>
             </div>
           </div>
           <h3 className="text-3xl font-bold uppercase">Recent Work Showcase</h3>
-          <section className="overflow-hidden h-[360px] md:select-none md:h-[400px]" ref={projectEmblaRef}>
+          <section className="overflow-hidden md:select-none" ref={projectEmblaRef}>
             <div className="flex">
               {projects.map(project => (
-                <div className="grow-0 shrink-0 basis-full mr-8 md:basis-[500px]">
-                  <div className="relative w-full h-full">
+                <div className="grow-0 shrink-0 basis-full mr-8 md:basis-[600px] h-[300px] relative" key={project.id}>
+                  <div className=" w-full h-full">
                     <img className="w-full h-full object-fill" src={project.image} alt="" />
                     <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-t from-blue-500 to-transparent flex items-end px-6 py-4">
                       <div className="w-full">
@@ -140,7 +144,7 @@ export default function Index() {
         </div>
       </section>
       <section className="px-8 py-24">
-        <Fact />
+        {/* <Fact /> */}
       </section>
       <section>
         <div className="flex flex-col gap-8 px-8 py-24 bg-gradient-to-t from-yellow-400 to-transparent">
@@ -153,10 +157,11 @@ export default function Index() {
           <div className="overflow-hidden" ref={testimonyEmblaRef}>
             <div className="flex">
               {testimonials.map(testimonial => {
-                const { name, testimonyBody } = testimonial
+                const { name, testimonyBody, id } = testimonial
                 return (
-                  <div className="flex flex-col gap-8 grow-0 shrink-0 basis-full bg-white px-3 py-9 rounded-md mr-10">
-                    <p className="text-blue-700 text-lg font-bold">{name}</p>
+                  <div className="flex flex-col gap-8 grow-0 shrink-0 basis-full bg-white px-8 py-9 rounded-md mr-10 md:basis-[500px] relative" key={id}>
+                    <img src="/assets/img/testimonial/home-2/shape.png" className="absolute top-0 right-2/4" alt="" />
+                    <p className="text-blue-700 text-lg font-bold uppercase">{name}</p>
                     <p className="font-bold">"{testimonyBody}"</p>
                   </div>
                 )
@@ -173,33 +178,43 @@ export default function Index() {
             </div>
           </div>
           <h3 className="font-bold text-3xl uppercase text-center mt-12">Latest Blog and Article</h3>
-          <div className="overflow-hidden w-full" ref={blogEmblaRef}>
-            <div className="flex">
-              {/* //TODO: Add blog posts here */}
-              {blog.map(post => {
-                const { updatedAt } = post
-                const date = new Date(updatedAt)
-                const day = date.getDate()
-                // get the month as a string
-                const month = date.toLocaleString('default', { month: 'long' })
-                return (
-                  <div className="flex flex-col grow-0 shrink-0 basis-full">
-                    <div className="">
-                      <img src={post.image} className="w-full h-full object-fill" alt="" />
-                    </div>
-                    <div className="bg-gray-100 flex flex-col gap-4 py-8 px-4 relative">
-                      <div className="relative top-[-70px] flex justify-center">
-                        <div className="bg-blue-800 w-[90px] flex flex-col text-white justify-center items-center ">
-                          <p className="text-4xl font-bold">{day}</p>
-                          <p className="text-lg uppercase ">{month}</p>
-                        </div>
+          <div className="md:grid md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_3fr] gap-4">
+            <div className="p-8 bg-gray-100">
+              <div className="h-full flex flex-col justify-evenly py-8 px-8" style={{ background: "url('/assets/svg/blob-background.svg') repeat center center / 50px" }}>
+                <p className="bg-black px-4 py-2 font-bold text-white text-2xl">Get Started With Your Free Estimate.</p>
+                <div className="flex justify-center items-center">
+                  <Link className="bg-yellow-400 py-2 px-4 flex gap-2" to={`/services`}>Get Started Now <BsArrowRight /></Link>
+                </div>
+              </div>
+            </div>
+            <div className="overflow-hidden w-full" ref={blogEmblaRef}>
+              <div className="flex">
+                {/* //TODO: Add blog posts here */}
+                {blog.map(post => {
+                  const { updatedAt, id } = post
+                  const date = new Date(updatedAt)
+                  const day = date.getDate()
+                  // get the month as a string
+                  const month = date.toLocaleString('default', { month: 'long' })
+                  return (
+                    <div className="flex flex-col grow-0 shrink-0 basis-full max-w-full md:basis-[300px] mr-6" key={id}>
+                      <div className="basis-[300px]">
+                        <img src={post.image} className="w-full h-full object-fill" alt="" />
                       </div>
-                      <p className="font-bold uppercase text-lg text-center">{post.title}</p>
-                      <button className="px-6 py-3 bg-yellow-400 flex items-center mx-auto">Read More <BsArrowRight className="ml-2" /></button>
+                      <div className="bg-gray-100 flex flex-col gap-4 py-8 px-4 relative">
+                        <div className="relative top-[-70px] flex justify-center">
+                          <div className="bg-blue-800 w-[90px] flex flex-col text-white justify-center items-center ">
+                            <p className="text-4xl font-bold">{day}</p>
+                            <p className="text-lg uppercase ">{month}</p>
+                          </div>
+                        </div>
+                        <p className="font-bold uppercase text-lg text-center">{trim(post.title, 40)}</p>
+                        <button className="px-6 py-3 bg-yellow-400 flex items-center mx-auto">Read More <BsArrowRight className="ml-2" /></button>
+                      </div>
                     </div>
-                  </div>
-                )
-              })}
+                  )
+                })}
+              </div>
             </div>
           </div>
         </div>

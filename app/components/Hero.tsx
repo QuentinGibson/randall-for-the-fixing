@@ -69,7 +69,7 @@ const createSplideSlides = (slides: Slide[]) => {
               <Link to={cta.url} className="cta px-6 py-2 bg-slate-900">{cta.content}</Link>
             </div>
           </div>
-          <div className='mt-10 h-[260px] relative md:max-w-sm'>
+          <div className='h-[260px] relative md:max-w-[520px]'>
             <img className='object-fill w-full h-full' src={image.url} alt={image.altText} />
           </div>
         </div>

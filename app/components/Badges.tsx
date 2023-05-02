@@ -37,8 +37,8 @@ export default function Badges() {
         </div>
         <h3 className="text-5xl font-bold text-center">Award Winning Service</h3>
         <div className="flex flex-wrap gap-8 justify-center">
-          {badges.map(badge => (
-            <div className="relative">
+          {badges.map((badge, index) => (
+            <div className="relative" key={index}>
               <img src={badge.url} alt={badge.altText} className="w-full h-auto filter grayscale transition duration-500 ease-in-out hover:grayscale-0" width={50} />
             </div>
           ))}
