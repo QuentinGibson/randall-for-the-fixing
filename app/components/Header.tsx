@@ -1,5 +1,5 @@
 import { CgMenuLeftAlt } from 'react-icons/cg';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import cn from 'classnames'
 import { BsChatSquare, BsEnvelope, BsMap, BsPhone, BsPlusSquare, BsX } from 'react-icons/bs';
 import { Link } from '@remix-run/react';
@@ -13,6 +13,7 @@ interface Business {
 }
 
 interface Service {
+  id: string,
   title: string,
   slug: string,
   serviceName: string
@@ -25,16 +26,18 @@ interface ServiceType {
 export default function Header({ business, services, projects }: { business: Business, services: Service[], projects: any }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
-
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const commercialServices = services.filter(service => service.serviceName.includes('Commercial'));
   const residentialServices = services.filter(service => service.serviceName.includes('Residential'));
   const commercialProject = projects.filter(project => project.service.serviceName.includes('Commercial'));
   const residentialProject = projects.filter(project => project.service.serviceName.includes('Residential'));
 
-  const handleMenuClick = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const handleMenuClick = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, [setIsMenuOpen]);
+  const closeNavigation = useCallback(() => {
+    setIsMenuOpen(false)
+  },[setIsMenuOpen])
   return (
     <header>
       <div className="flex justify-between h-[100px] fixed w-full z-50 bg-white px-8 py-4">
@@ -76,14 +79,14 @@ export default function Header({ business, services, projects }: { business: Bus
             <div className="px-8 w-full">
               <ul className="w-full uppercase">
                 <li className='border-b border-gray-200 py-2 hover:text-blue-800 transition duration-100'>
-                  <Link to="/" className='w-full h-full flex font-bold'>Home</Link>
+                  <Link prefetch='intent' to="/" className='w-full h-full flex font-bold' onClick={closeNavigation}>Home</Link>
                 </li>
                 <li className='border-b border-gray-200 py-2 hover:text-blue-800 transition duration-100'>
-                  <Link to="/about" className='w-full h-full flex font-bold'>About</Link>
+                  <Link prefetch='intent' to="/about" className='w-full h-full flex font-bold' onClick={closeNavigation}>About</Link>
                 </li>
                 <li className='border-b border-gray-200 py-2 flex flex-col justify-between cursor-pointer' onClick={() => setIsServicesOpen(!isServicesOpen)}>
                   <div className="flex justify-between items-center">
-                    <Link className='h-full flex font-bold hover:text-blue-800 transition duration-100' to="/services">Services</Link>
+                    <Link prefetch='intent' className='h-full flex font-bold hover:text-blue-800 transition duration-100' to="/services" onClick={closeNavigation}>Services</Link>
                     <BsPlusSquare className='hover:text-blue-800 transition-colors duration-100' />
                   </div>
                   {isServicesOpen && (
@@ -92,14 +95,14 @@ export default function Header({ business, services, projects }: { business: Bus
                         Residential Services
                       </li>
                       {residentialServices.map((service) => (
-                        <li className='border-b border-gray-200 py-2 px-6 hover:text-blue-800 transition duration-100 nav-list-item'>
-                          <Link to={service.slug} className='w-full h-full flex font-bold'>{service.title}</Link>
+                        <li className='border-b border-gray-200 py-2 px-6 hover:text-blue-800 transition duration-100 nav-list-item' key={service.id}>
+                          <Link prefetch="intent" to={service.slug} className='w-full h-full flex font-bold' onClick={closeNavigation}>{service.title}</Link>
                         </li>
                       ))}
                       <li className='pl-6 py-4 pointer-events-none'>Commercial Services</li>
                       {commercialServices.map((service) => (
-                        <li className='border-b border-gray-200 py-2 px-6 hover:text-blue-800 transition duration-100 nav-list-item'>
-                          <Link to={service.slug} className='w-full h-full flex font-bold'>{service.title}</Link>
+                        <li className='border-b border-gray-200 py-2 px-6 hover:text-blue-800 transition duration-100 nav-list-item' key={service.id}>
+                          <Link prefetch="intent" to={service.slug} className='w-full h-full flex font-bold' onClick={closeNavigation}>{service.title}</Link>
                         </li>
                       ))}
                     </ul>
@@ -107,7 +110,7 @@ export default function Header({ business, services, projects }: { business: Bus
                 </li>
                 <li className='border-b border-gray-200 py-2 flex flex-col justify-between cursor-pointer' onClick={() => setIsProjectsOpen(!isProjectsOpen)}>
                   <div className="flex justify-between items-center">
-                    <Link className='h-full flex font-bold hover:text-blue-800 transition duration-100' to="/services">Projects</Link>
+                    <Link prefetch="intent" className='h-full flex font-bold hover:text-blue-800 transition duration-100' to="/services" onClick={closeNavigation}>Projects</Link>
                     <BsPlusSquare className='hover:text-blue-800 transition-colors duration-100' />
                   </div>
                   {isProjectsOpen && (
@@ -117,13 +120,13 @@ export default function Header({ business, services, projects }: { business: Bus
                       </li>
                       {residentialProject.map((project) => (
                         <li className='border-b border-gray-200 py-2 px-6 hover:text-blue-800 transition duration-100 nav-list-item'>
-                          <Link to={project.slug} className='w-full h-full flex font-bold'>{project.title}</Link>
+                          <Link prefetch="intent" to={project.slug} className='w-full h-full flex font-bold' onClick={closeNavigation}>{project.title}</Link>
                         </li>
                       ))}
                       <li className='pl-6 py-4 pointer-events-none'>Commercial Projects</li>
                       {commercialProject.map((project) => (
                         <li className='border-b border-gray-200 py-2 px-6 hover:text-blue-800 transition duration-100 nav-list-item'>
-                          <Link to={project.slug} className='w-full h-full flex font-bold'>{project.title}</Link>
+                          <Link prefetch="intent" to={project.slug} className='w-full h-full flex font-bold' onClick={closeNavigation}>{project.title}</Link>
                         </li>
                       ))}
                     </ul>
@@ -131,7 +134,7 @@ export default function Header({ business, services, projects }: { business: Bus
                 </li>
 
                 <li className='border-b border-gray-200 py-2 hover:text-blue-800 transition duration-100'>
-                  <Link to="/contact" className='w-full h-full flex font-bold'>Contact</Link>
+                  <Link prefetch="intent" to="/contact" className='w-full h-full flex font-bold' onClick={closeNavigation}>Contact</Link>
                 </li>
               </ul>
             </div>
