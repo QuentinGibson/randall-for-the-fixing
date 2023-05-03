@@ -49,9 +49,7 @@ export default function App() {
       </head>
       <body className="h-full">
         <Layout business={business} services={services} projects={projects}>
-          <div>
-            <Outlet />
-          </div>
+          <Outlet />
         </Layout>
         <ScrollRestoration />
         <Scripts />

@@ -3,11 +3,13 @@ import Header from "./Header";
 
 export default function Layout({ business, services, projects, children }: any) {
   return (
-    <main>
+    <>
       <Header business={business} services={services} projects={projects} />
-      {children}
+      <main>
+        {children}
+      </main>
       <Footer business={business} />
-    </main>
+    </>
 
 
   );
