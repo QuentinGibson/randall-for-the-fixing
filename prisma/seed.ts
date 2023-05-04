@@ -29,7 +29,7 @@ async function seed() {
   await prisma.business.create({
     data: {
       name: "Randall’s For The Fixing",
-      logo: "https://picsum.photos/200",
+      logo: "/assets/img/logo/logo.png",
       phone: "4704612731",
       address: "Bohannon Road, Fairburn, GA 30213",
       email: "Randallsforthefixing1@gmail.com"
@@ -52,7 +52,7 @@ async function seed() {
       slug: "how-to-mantain-your-driveway-and-keep-it-looking-new",
       blogBody: "This is how you maintain your driveway. Maintaining your driveway is important. But finding time to do it is hard.",
       tags: { connect: [{ id: blogTag.id }, { id: fastReadTag.id }] },
-      image: "https://picsum.photos/200"
+      image: "/assets/",
     }, {
       title: "Why Regular Pressure Washing is Essential for Your Home or Business",
       user: { connect: { id: user.id } },
@@ -251,7 +251,7 @@ async function seed() {
     },{
       title: "Outside Cleaning",
       slug: "outside-cleaning",
-      image: "https://picsum.photos/200",
+      image: "/assets/img/services/outside-cleaning.jpg",
       serviceDescription: "Maintaining a clean and visually appealing exterior is essential for both commercial and residential properties, as it significantly contributes to the overall appeal, value, and safety of the space. Over time, exterior surfaces can accumulate dirt, grime, mold, and stains, which can detract from the appearance and potentially cause damage if left unaddressed.",
       type: { connect: { id: commercialType.id } },
       subtext: "Preserve property value with comprehensive outside cleaning services.",
