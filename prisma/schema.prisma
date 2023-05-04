@@ -40,6 +40,7 @@ model Service {
   title               String         @unique
   slug               String         @unique
   type               ServiceType    @relation(fields: [serviceName], references: [name])
+  icon               String?
   image              String
   subtext            String
   serviceDescription String
@@ -55,7 +56,7 @@ model Service {
 
 model ServiceImage {
   id      String  @id @default(cuid())
-  name    String  @unique
+  altText    String  
   image   String
   service Service? @relation(fields: [serviceId], references: [id])
 
@@ -68,7 +69,7 @@ model Project {
   id          String  @id @default(cuid())
   title        String  @unique
   image       String
-  slug        String
+  slug        String @unique
   service     Service @relation(fields: [serviceId], references: [id])
   projectBody String
 
@@ -81,7 +82,7 @@ model Blog {
   id       String @id @default(cuid())
   title     String @unique
   image    String
-  slug    String
+  slug    String @unique
   blogBody String
   tags     Tag[]
   user     User   @relation(fields: [userId], references: [id])
@@ -103,7 +104,6 @@ model Tag {
 model Testimony {
   id            String      @id @default(cuid())
   name          String      @unique
-  image         String
   type          ServiceType @relation(fields: [serviceTypeId], references: [id])
   testimonyBody String
 

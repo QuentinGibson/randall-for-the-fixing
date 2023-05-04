@@ -8,6 +8,14 @@ export async function getProjectById(id:string) {
   return project
 }
 
+export async function getProjectBySlug(slug: string) {
+  const project = await prisma.project.findUnique({ where: { slug } });
+  if (!project) {
+    throw new Error("Project not found");
+  }
+  return {project, message: "Project found"}
+}
+
 
 export async function getProjects() {
   const projects = await prisma.project.findMany({
