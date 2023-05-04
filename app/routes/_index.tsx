@@ -79,10 +79,12 @@ export default function Index() {
                 return (
                   <div className="grow-0 shrink-0 basis-full md:basis-[280px] md:grow md:mr-8" key={id}>
                     <div className="bg-gray-200 text-black">
-                      <div className="px-4 pb-8 py-4 flex flex-col gap-4">
+                      <div className="pb-8 flex flex-col gap-4">
                         <div className="relative">
                           <div className="h-[220px] w-full relative flex flex-col gap-4">
-                            <img src={image} alt="" className="w-full object-fill h-[200px]" />
+                            <Link to={`/services/${service.slug}`}>
+                              <img src={image} alt="" className="w-full object-fill h-[200px]" />
+                            </Link>
                             <div className="relative bottom-12 w-full flex justify-center">
                               <div className="w-16 h-16 rounded-full bg-white shadow hover:shadow-lg transform hover:-translate-y-1 transition duration-300 flex items-center justify-center text-black">
                                 <BsAward className="w-10 h-10 rounded" />
@@ -90,10 +92,12 @@ export default function Index() {
                             </div>
                           </div>
                         </div>
-                        <h4 className=" font-bold text-xl">{service.title}</h4>
-                        <p className="basis-[80px]">{trim(service.subtext, 80)}</p>
-                        <div className="flex">
-                          <button className="py-1 px-3 bg-blue-800 flex items-center text-black">Details<BsArrowRight className="ml-2" /></button>
+                        <div className="flex px-4 flex-col gap-2">
+                          <h4 className=" font-bold text-xl">{service.title}</h4>
+                          <p className="basis-[80px]">{trim(service.subtext, 80)}</p>
+                          <div className="flex">
+                            <Link to={`/services/${service.slug}`} className="py-1 px-3 bg-blue-800 flex items-center text-white">See More<BsArrowRight className="ml-2" /></Link>
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -17,7 +17,7 @@ export default function Projects() {
         </div>
       </section>
       <section className="my-24">
-        <div className="grid grid-cols-4 gap-10 md:px-10">
+        <div className="grid grid-cols-4 gap-10">
           {projects.map((project) => (
             <div className="flex flex-col border-gray-300 border rounded-lg">
               <Link to={`/projects/${project.slug}`}>
@@ -29,9 +29,9 @@ export default function Projects() {
                   <p className="text-gray-500">{project.service.title}</p>
                   <p className="text-gray-500">{project.service.type.name}</p>
                 </div>
-              <div className="flex">
-                <Link to={`/projects/${project.slug}`} className="flex gap-2 items-center">See more<BsArrowRight /></Link>
-              </div>
+                <div className="flex">
+                  <Link to={`/projects/${project.slug}`} className="flex gap-2 items-center">See more<BsArrowRight /></Link>
+                </div>
               </div>
             </div>
           ))}
