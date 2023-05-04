@@ -1,19 +1,27 @@
 import { prisma } from "~/db.server";
 export async function getServiceById(id:string) {
-  const service = prisma.service.findUnique({ where: { id } });
+  const service = await prisma.service.findUnique({ where: { id } });
   if (!service) {
     throw new Error("Service not found");
   }
   return service
 }
 
+export async function getServiceBySlug(slug: string) {
+  const service = await prisma.service.findUnique({ where: { slug } });
+  if (!service) {
+    throw new Error("Service not found");
+  }
+  return { service , message: "Service found" }
+}
+
 export async function getAllServices() {
-  return prisma.service.findMany();
+  return await prisma.service.findMany();
 }
 
 export async function getServicesByCategory(category: string) {
 
-  const services = prisma.service.findMany({
+  const services = await prisma.service.findMany({
     where: {
       type: {name: category}},
     include: {

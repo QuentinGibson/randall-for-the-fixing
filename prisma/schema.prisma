@@ -38,7 +38,7 @@ model ServiceType {
 model Service {
   id                 String         @id @default(cuid())
   title               String         @unique
-  slug               String
+  slug               String         @unique
   type               ServiceType    @relation(fields: [serviceName], references: [name])
   image              String
   subtext            String

@@ -42,7 +42,9 @@ export default function Header({ business, services, projects }: { business: Bus
     <header>
       <div className="flex justify-between h-[100px] fixed w-full z-50 bg-white px-8 py-4">
         <div className="flex">
-          <img className="h-full object-contain" src="/assets/img/logo/logo.png" alt="Randall's For The Fixing Offical Logo" />
+          <Link to="/">
+            <img className="h-full object-contain" src={business.logo} alt="Randall's For The Fixing Offical Logo" />
+          </Link>
         </div>
         <div className='flex grow-0 shrink-0 basis-16 rounded-md hover:cursor-pointer hover:scale-105'>
           <button className="menu-button appearance-none w-full h-full" onClick={handleMenuClick}>
@@ -96,13 +98,13 @@ export default function Header({ business, services, projects }: { business: Bus
                       </li>
                       {residentialServices.map((service) => (
                         <li className='border-b border-gray-200 py-2 px-6 hover:text-blue-800 transition duration-100 nav-list-item' key={service.id}>
-                          <Link prefetch="intent" to={service.slug} className='w-full h-full flex font-bold' onClick={closeNavigation}>{service.title}</Link>
+                          <Link prefetch="intent" to={`/services/${service.slug}`} className='w-full h-full flex font-bold' onClick={closeNavigation}>{service.title}</Link>
                         </li>
                       ))}
                       <li className='pl-6 py-4 pointer-events-none'>Commercial Services</li>
                       {commercialServices.map((service) => (
                         <li className='border-b border-gray-200 py-2 px-6 hover:text-blue-800 transition duration-100 nav-list-item' key={service.id}>
-                          <Link prefetch="intent" to={service.slug} className='w-full h-full flex font-bold' onClick={closeNavigation}>{service.title}</Link>
+                          <Link prefetch="intent" to={`/services/${service.slug}`} className='w-full h-full flex font-bold' onClick={closeNavigation}>{service.title}</Link>
                         </li>
                       ))}
                     </ul>
@@ -110,7 +112,7 @@ export default function Header({ business, services, projects }: { business: Bus
                 </li>
                 <li className='border-b border-gray-200 py-2 flex flex-col justify-between cursor-pointer' onClick={() => setIsProjectsOpen(!isProjectsOpen)}>
                   <div className="flex justify-between items-center">
-                    <Link prefetch="intent" className='h-full flex font-bold hover:text-blue-800 transition duration-100' to="/services" onClick={closeNavigation}>Projects</Link>
+                    <Link prefetch="intent" className='h-full flex font-bold hover:text-blue-800 transition duration-100' to="/projects/" onClick={closeNavigation}>Projects</Link>
                     <BsPlusSquare className='hover:text-blue-800 transition-colors duration-100' />
                   </div>
                   {isProjectsOpen && (
@@ -126,7 +128,7 @@ export default function Header({ business, services, projects }: { business: Bus
                       <li className='pl-6 py-4 pointer-events-none'>Commercial Projects</li>
                       {commercialProject.map((project) => (
                         <li className='border-b border-gray-200 py-2 px-6 hover:text-blue-800 transition duration-100 nav-list-item'>
-                          <Link prefetch="intent" to={project.slug} className='w-full h-full flex font-bold' onClick={closeNavigation}>{project.title}</Link>
+                          <Link prefetch="intent" to={`/projects/${project.slug}`} className='w-full h-full flex font-bold' onClick={closeNavigation}>{project.title}</Link>
                         </li>
                       ))}
                     </ul>
