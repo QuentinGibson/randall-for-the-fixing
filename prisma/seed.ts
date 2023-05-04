@@ -29,7 +29,7 @@ async function seed() {
   await prisma.business.create({
     data: {
       name: "Randall’s For The Fixing",
-      logo: "/assets/img/logo/logo.png",
+      logo: "/assets/img/logo/logo.webp",
       phone: "4704612731",
       address: "Bohannon Road, Fairburn, GA 30213",
       email: "randallsforthefixing1@gmail.com"
