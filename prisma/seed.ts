@@ -49,7 +49,7 @@ async function seed() {
     {
       title: "How to mantain your driveway and keep it looking new",
       user: { connect: { id: user.id } },
-      slug: "rachel",
+      slug: "how-to-mantain-your-driveway-and-keep-it-looking-new",
       blogBody: "This is how you maintain your driveway. Maintaining your driveway is important. But finding time to do it is hard.",
       tags: { connect: [{ id: blogTag.id }, { id: fastReadTag.id }] },
       image: "https://picsum.photos/200"
@@ -63,14 +63,14 @@ async function seed() {
     }, {
       title: "The Dos and Don'ts of DIY Pressure Washing",
       user: { connect: { id: user.id } },
-      slug: "why-regular-pressure-washing-is-essential-for-your-home-or-business",
+      slug: "do-and-donts-of-diy-pressure-washing",
       blogBody: "Pressure washing is a great way to keep your home or business looking clean and fresh. It can also help prevent damage from mold, mildew, and other harmful substances. But how often should you pressure wash? And what are the benefits of doing so? In this blog post, we'll answer these questions and more!",
       tags: { connect: [{ id: blogTag.id },] },
       image: "https://picsum.photos/200"
     },{
       title: "The Importance of Grease Trap Cleaning for Your Restaurant or Commercial Kitchen",
       user: { connect: { id: user.id } },
-      slug: "why-regular-pressure-washing-is-essential-for-your-home-or-business",
+      slug: "importance-of-grease-trap-cleaning-for-your-restaurant-or-commercial-kitchen",
       blogBody: "Pressure washing is a great way to keep your home or business looking clean and fresh. It can also help prevent damage from mold, mildew, and other harmful substances. But how often should you pressure wash? And what are the benefits of doing so? In this blog post, we'll answer these questions and more!",
       tags: { connect: [{ id: blogTag.id },] },
       image: "https://picsum.photos/200"

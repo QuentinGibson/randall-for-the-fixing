@@ -68,7 +68,7 @@ model Project {
   id          String  @id @default(cuid())
   title        String  @unique
   image       String
-  slug        String
+  slug        String @unique
   service     Service @relation(fields: [serviceId], references: [id])
   projectBody String
 
@@ -81,7 +81,7 @@ model Blog {
   id       String @id @default(cuid())
   title     String @unique
   image    String
-  slug    String
+  slug    String @unique
   blogBody String
   tags     Tag[]
   user     User   @relation(fields: [userId], references: [id])
