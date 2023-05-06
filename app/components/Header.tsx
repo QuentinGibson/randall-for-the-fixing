@@ -1,7 +1,7 @@
 import { CgMenuLeftAlt } from 'react-icons/cg';
 
 import cn from 'classnames'
-import { BsEnvelope, BsMap, BsPhone, BsPlusSquare, BsX, BsCaretDown } from 'react-icons/bs';
+import { BsEnvelope, BsMap, BsPhone, BsPlusSquare, BsX, BsCaretDown, BsCaretDownFill } from 'react-icons/bs';
 import { Link } from '@remix-run/react';
 import { useMediaQuery } from 'usehooks-ts';
 import { useState, useCallback } from 'react';
@@ -43,6 +43,7 @@ export default function Header({ business, services, projects }: { business: Bus
     setIsMenuOpen(false)
   }, [setIsMenuOpen])
   const handleDesktopMenuOnHover = useCallback((setMenuState: any) => {
+
     setMenuState(true)
   }, [])
   const closeMenu = useCallback((setMenuState: any) => {
@@ -58,21 +59,41 @@ export default function Header({ business, services, projects }: { business: Bus
             </Link>
           </div>
           {isDesktop ? (
-            <ul className="flex gap-8 items-center">
-              <li>
-                <Link prefetch='intent' to="/">Home</Link>
-              </li>
-              <li>
-                <Link prefetch='intent' to="/about">About</Link>
-              </li>
-              <li className='flex gap-1' onMouseEnter={() => { handleDesktopMenuOnHover(setIsDesktopServiceOpen) }}>
-                <Link prefetch='intent' to="/services">Services</Link>
-                <BsCaretDown />
-              </li>
-              <li>
-                <Link prefetch='intent' to="/contact">Contact</Link>
-              </li>
-            </ul>
+            <>
+              <ul className="flex gap-8 items-center uppercase font-bold">
+                <li>
+                  <Link prefetch='intent' to="/">Home</Link>
+                </li>
+                <li>
+                  <Link prefetch='intent' to="/about">About</Link>
+                </li>
+                <li onMouseEnter={() => { handleDesktopMenuOnHover(setIsDesktopServicesOpen) }}>
+                  <div className='relative inline-block'>
+                    <div className='flex gap-1 items-center'>
+                      <Link prefetch='intent' to="/services">Services</Link>
+                      <BsCaretDownFill />
+                    </div>
+                    {isDesktopServicesOpen && (
+                      <div className='absolute right-0 origin-top-left bg-white px-4 py-2 mt-2 w-[350px] border '>
+                        <ul className='px-4 grid grid-cols-2 grid-rows-4 list-disc gap-x-10 py-2'>
+                          {services.map((service) => (
+                            <li className='py-2'>
+                              <Link to={service.slug}>{service.slug}</Link>
+                            </li>
+                          ))}
+
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </li>
+                <li>
+                  <Link prefetch='intent' to="/contact">Contact</Link>
+                </li>
+              </ul>
+
+            </>
+
           ) : (
             <div className='flex grow-0 shrink-0 basis-16 rounded-md hover:cursor-pointer hover:scale-105'>
               <button className="menu-button appearance-none w-full h-full" onClick={handleMenuClick}>
@@ -181,18 +202,7 @@ export default function Header({ business, services, projects }: { business: Bus
             </div>
           </div>
         </nav>
-        {isDesktopServicesOpen && (
-          <section>
-            <ul className="grid grid-col-2 gap-4">
-              {services.map((service) => (
-                <li className="list-disc">
-                  <Link prefetch="intent" to={`/services/${service.slug}`} className='w-full h-full flex font-bold' onClick={closeNavigation}>{service.title}</Link>
-                </li>
-              ))}
 
-            </ul>
-          </section>
-        )}
       </header >
 
     </>
