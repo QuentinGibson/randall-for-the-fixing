@@ -25,11 +25,18 @@ interface ServiceType {
   name: string,
 }
 
-export default function Header({ business, services, projects }: { business: Business, services: Service[], projects: any }) {
+interface Project {
+  title: string,
+  slug: string,
+  service: Service,
+}
+
+export default function Header({ business, services, projects }: { business: Business, services: Service[], projects: Project[] }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isDesktopServicesOpen, setIsDesktopServicesOpen] = useState(false);
+  const [isDesktopProjectsOpen, setIsDesktopProjectsOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const commercialServices = services.filter(service => service.serviceName.includes('Commercial'));
   const residentialServices = services.filter(service => service.serviceName.includes('Residential'));
@@ -43,15 +50,25 @@ export default function Header({ business, services, projects }: { business: Bus
     setIsMenuOpen(false)
   }, [setIsMenuOpen])
   const handleDesktopMenuOnHover = useCallback((setMenuState: any) => {
-
+    if (isDesktopServicesOpen) {
+      setIsDesktopServicesOpen(false)
+    } else if (isDesktopProjectsOpen) {
+      setIsDesktopProjectsOpen(false)
+    }
     setMenuState(true)
-  }, [])
+  }, [isDesktopProjectsOpen, isDesktopServicesOpen, setIsDesktopProjectsOpen, setIsDesktopServicesOpen])
   const closeMenu = useCallback((setMenuState: any) => {
     setMenuState(false)
   }, [])
   return (
     <>
-      <header>
+      <header onMouseLeave={() => {
+        if (isDesktopServicesOpen) {
+          closeMenu(setIsDesktopServicesOpen)
+        } else if (isDesktopProjectsOpen) {
+          closeMenu(setIsDesktopProjectsOpen)
+        }
+      }}>
         <div className="flex justify-between h-[100px] fixed w-full z-50 bg-white px-8 py-4">
           <div className="flex">
             <Link to="/">
@@ -78,10 +95,29 @@ export default function Header({ business, services, projects }: { business: Bus
                         <ul className='px-4 grid grid-cols-2 grid-rows-4 list-disc gap-x-10 py-2'>
                           {services.map((service) => (
                             <li className='py-2'>
-                              <Link to={service.slug}>{service.slug}</Link>
+                              <Link to={`/services/${service.slug}`}>{service.title}</Link>
                             </li>
                           ))}
 
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </li>
+                <li onMouseEnter={() => { handleDesktopMenuOnHover(setIsDesktopProjectsOpen) }}>
+                  <div className='relative inline-block'>
+                    <div className='flex gap-1 items-center'>
+                      <Link prefetch='intent' to="/projects">Projects</Link>
+                      <BsCaretDownFill />
+                    </div>
+                    {isDesktopProjectsOpen && (
+                      <div className='absolute right-0 origin-top-left bg-white px-4 py-2 mt-2 w-[350px] border '>
+                        <ul className='px-4 grid grid-cols-2 grid-rows-4 list-disc gap-x-10 py-2'>
+                          {projects.map((project) => (
+                            <li className='py-2'>
+                              <Link to={`/projects/${project.slug}`}>{project.title}</Link>
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     )}
