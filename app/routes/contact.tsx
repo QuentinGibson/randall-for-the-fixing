@@ -1,5 +1,5 @@
 import { LoaderArgs, json } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useLoaderData, useFetcher } from "@remix-run/react";
 import { BsEnvelope, BsPhone } from "react-icons/bs";
 import { FaRegAddressBook } from "react-icons/fa";
 import { getBusinessById, getIdForFirstBusiness } from "~/models/business.server";
@@ -14,6 +14,7 @@ export const loader = async ({ request, params }: LoaderArgs) => {
 
 export default function Contact() {
   const { business, services } = useLoaderData<typeof loader>()
+  const formFetcher = useFetcher();
   return (
     <>
       <section className="mt-[100px] pt-28 pb-20 w-full relative" style={{ background: "url('/assets/svg/surf-background.svg') no-repeat center center / cover" }}>
@@ -39,7 +40,7 @@ export default function Contact() {
       </section>
       <section className="py-12 flex justify-center items-center">
         <div className="py-3 px-4 max-w-full w-[500px] bg-blue-800">
-          <Form className="flex flex-col gap-1">
+          <formFetcher.Form className="flex flex-col gap-1">
             <label className="uppercase text-white" htmlFor="name">Name</label>
             <input type="text" name="name" id="name" placeholder="Full Name:" className="py-3 px-2" />
             <label className="uppercase text-white" htmlFor="email">Email</label>
@@ -53,7 +54,7 @@ export default function Contact() {
             </select>
             <label className="uppercase text-white" htmlFor="message">Message</label>
             <textarea name="message" id="message" className="h-28 resize-none py-3 px-2"></textarea>
-          </Form>
+          </formFetcher.Form>
         </div>
       </section>
     </>

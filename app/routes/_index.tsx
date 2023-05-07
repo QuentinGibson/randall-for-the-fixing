@@ -1,6 +1,5 @@
 import { LoaderArgs, V2_MetaFunction, json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import Header from "~/components/Header";
 import Hero from "~/components/Hero";
 import QuoteForm from "../components/QuoteForm";
 import { getAllServices } from "~/models/service.server";
@@ -8,7 +7,6 @@ import Badges from "~/components/Badges";
 import { BsArrowRight, BsArrowUpRight, BsAward } from "react-icons/bs";
 import useEmblaCarousel from "embla-carousel-react";
 import { getProjects } from "~/models/project.server";
-import Fact from "~/components/Fact";
 import { getTestimonies } from "~/models/testimony.server";
 import { getBlogs } from "~/models/blog.server";
 
@@ -53,8 +51,8 @@ export default function Index() {
               <BsAward className="w-10 h-10 rounded" />
             </div>
             <p className="font-bold text-2xl">Award Winning</p>
-            <div>
-              <button className="flex items-center bg-yellow-400 px-10 py-4">Our Services<BsArrowRight className="ml-1" /></button>
+            <div className="flex">
+              <Link className="flex items-center bg-yellow-400 px-10 py-4" to={`/services/`}>Our Services<BsArrowRight className="ml-1" /></Link>
             </div>
           </div>
           <div className="grid grid-cols-2 grid-rows-2 gap-4 relative">
@@ -77,7 +75,7 @@ export default function Index() {
               {services.map(service => {
                 const { image, id } = service
                 return (
-                  <div className="grow-0 shrink-0 basis-full md:basis-[280px] md:grow md:mr-8" key={id}>
+                  <div className="grow-0 shrink-0 basis-full md:basis-[380px] md:grow md:mr-8" key={id}>
                     <div className="bg-gray-200 text-black">
                       <div className="pb-8 flex flex-col gap-4">
                         <div className="relative">
@@ -85,11 +83,6 @@ export default function Index() {
                             <Link to={`/services/${service.slug}`}>
                               <img src={image} alt="" className="w-full object-fill h-[200px]" />
                             </Link>
-                            <div className="relative bottom-12 w-full flex justify-center">
-                              <div className="w-16 h-16 rounded-full bg-white shadow hover:shadow-lg transform hover:-translate-y-1 transition duration-300 flex items-center justify-center text-black">
-                                <BsAward className="w-10 h-10 rounded" />
-                              </div>
-                            </div>
                           </div>
                         </div>
                         <div className="flex px-4 flex-col gap-2">
@@ -201,10 +194,10 @@ export default function Index() {
                   // get the month as a string
                   const month = date.toLocaleString('default', { month: 'long' })
                   return (
-                    <div className="flex flex-col grow-0 shrink-0 basis-full max-w-full md:basis-[300px] mr-6" key={id}>
-                      <div className="basis-[300px]">
-                        <img src={post.image} className="w-full h-full object-fill" alt="" />
-                      </div>
+                    <div className="flex flex-col grow-0 shrink-0 basis-full max-w-full md:basis-[600px] mr-6" key={id}>
+                      <Link to={`/blog/${post.slug}`} className="basis-[400px]">
+                        <img src={post.image} className="w-full h-full object-fill aspect-[3/2]" alt="" />
+                      </Link>
                       <div className="bg-gray-100 flex flex-col gap-4 py-8 px-4 relative">
                         <div className="relative top-[-70px] flex justify-center">
                           <div className="bg-blue-800 w-[90px] flex flex-col text-white justify-center items-center ">
@@ -213,7 +206,7 @@ export default function Index() {
                           </div>
                         </div>
                         <p className="font-bold uppercase text-lg text-center">{trim(post.title, 40)}</p>
-                        <button className="px-6 py-3 bg-yellow-400 flex items-center mx-auto">Read More <BsArrowRight className="ml-2" /></button>
+                        <Link to={`/blog/${post.slug}`} className="px-6 py-3 bg-yellow-400 flex items-center mx-auto">Read More <BsArrowRight className="ml-2" /></Link>
                       </div>
                     </div>
                   )

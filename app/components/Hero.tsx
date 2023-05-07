@@ -1,9 +1,8 @@
 import { Link } from '@remix-run/react';
 import useEmblaCarousel from 'embla-carousel-react';
-import Autoplay from 'embla-carousel-autoplay'
-import { useCallback, useRef } from 'react';
+import { useCallback } from 'react';
 import Bubbles from './Bubbles';
-import { BsArrowLeft, BsArrowRight, BsArrowRightCircle } from 'react-icons/bs';
+import { BsArrowLeft, BsArrowRight } from 'react-icons/bs';
 
 interface Slide {
   pre: string,
@@ -44,7 +43,7 @@ const slides: Slide[] = [
     pre: "Commercial Cleaning Solution",
     header: "Say goodbye to all that dirt and grime",
     desc: "In addition to keeping your property looking great, we also prioritize safety and sanitation. Our expert grease trap and sidewalk pressure washing services can help prevent slips, falls, and accidents on your property. We use safe and effective techniques to ensure your property remains clean and hygienic for your employees and customers.",
-    cta: { content: "Commercial Services", url: "/services/commercial" },
+    cta: { content: "See More", url: "/services/" },
     image: {
       url: "assets/img/hero/home-2/img-2.webp",
       altText: "A grey clean home that has been cleaned"

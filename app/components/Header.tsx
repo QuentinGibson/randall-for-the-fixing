@@ -127,9 +127,7 @@ export default function Header({ business, services, projects }: { business: Bus
                   <Link prefetch='intent' to="/contact">Contact</Link>
                 </li>
               </ul>
-
             </>
-
           ) : (
             <div className='flex grow-0 shrink-0 basis-16 rounded-md hover:cursor-pointer hover:scale-105'>
               <button className="menu-button appearance-none w-full h-full" onClick={handleMenuClick}>
@@ -238,7 +236,6 @@ export default function Header({ business, services, projects }: { business: Bus
             </div>
           </div>
         </nav>
-
       </header >
 
     </>

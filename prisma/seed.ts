@@ -201,21 +201,6 @@ async function seed() {
         }
       }
     },{
-      title: "Office Buildings",
-      slug: "office-buildings",
-      image: "/assets/img/services/office-building.webp",
-      serviceDescription: "A clean and well-maintained office building is crucial for reflecting professionalism and attention to detail. Over time, exterior bricks and windows can accumulate dirt, grime, and stains, detracting from the building's appearance and potentially impacting the occupants' well-being.",
-      type: { connect: { id: commercialType.id } },
-      subtext: "Upgrade your commercial property with pristine window cleaning.",
-      serviceCta: "As a web developer, we understand the importance of providing exceptional services and value to our clients. Our office building cleaning services are designed to meet the highest quality standards, and we are committed to delivering outstanding results. Contact us today for a quote or to discuss your office building cleaning needs, and let us help you maintain the beauty and professionalism of your commercial property.",
-      serviceFiller: "Our commercial office building cleaning services cater to both exterior bricks and windows, offering a range of features that ensure a spotless and visually appealing environment. We utilize advanced cleaning techniques, including pressure washing and window cleaning, to provide a thorough clean that enhances the building's appearance. Our team is experienced in handling various building materials and designs, ensuring that your office building is well-maintained and professional.",
-      gallery: {
-        create: {
-        image: "/assets/img/services/office-building/office-building-1.webp",
-        altText: "An office building that was cleaned by our company"
-        }
-      }
-    },{
       title: "Curbsides",
       slug: "curbsides",
       image: "/assets/img/services/curbside.webp",
@@ -287,9 +272,9 @@ async function seed() {
     }
   }).then((service) => service?.id)
 
-  const officeId = await prisma.service.findUnique({
+  const outsidecleaningId = await prisma.service.findUnique({
     where: {
-      title: "Office Buildings"
+      title: "Outside Cleaning"
     }
   }).then((service) => service?.id)
 
@@ -315,14 +300,14 @@ async function seed() {
     }, {
       title: faker.lorem.words(),
       slug: 'office-1',
-      image: "/assets/img/projects/office-1.webp",
-      service: { connect: {id: officeId} },
+      image: "/assets/img/projects/home-3.webp",
+      service: { connect: {id: outsidecleaningId} },
       projectBody: faker.lorem.words(100)
     }, {
       title: faker.lorem.words(),
       slug: 'office-2',
-      image: "/assets/img/projects/office-2.webp",
-      service: { connect: {id: officeId} },
+      image: "/assets/img/projects/home-4.webp",
+      service: { connect: {id: outsidecleaningId} },
       projectBody: faker.lorem.words(100)
     }
   ]
