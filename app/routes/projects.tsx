@@ -16,8 +16,8 @@ export default function Projects() {
           <h1 className="text-white font-bold text-4xl">Projects</h1>
         </div>
       </section>
-      <section className="my-24">
-        <div className="grid grid-cols-4 gap-10">
+      <section className="my-24 px-4 md:px-8">
+        <div className="grid md:grid-cols-4 gap-10">
           {projects.map((project) => (
             <div className="flex flex-col border-gray-300 border rounded-lg">
               <Link to={`/projects/${project.slug}`}>

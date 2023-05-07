@@ -17,7 +17,7 @@ export default function ServiceRoute() {
         </div>
       </section>
       <section className="my-24 px-10">
-        <div className="grid grid-cols-4 gap-12">
+        <div className="grid md:grid-cols-4 gap-12">
           {services.map((service) => (
             <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow flex flex-col hover:scale-105 transition duration-150" key={service.id}>
               <Link to={service.slug} >

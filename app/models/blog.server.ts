@@ -8,6 +8,13 @@ export async function getBlogById(id:string) {
   return { blog , message: "Blog found successfully"}
 }
 
+export async function getBlogBySlug(slug: string) {
+  const blog = await prisma.blog.findUnique({ where: { slug } });
+  if (!blog) {
+    throw new Error("Blog not found");
+  }
+  return { blog , message: "Blog found successfully"}
+}
 export async function getBlogs() {
   const blogs = await prisma.blog.findMany();
   if (!blogs) {

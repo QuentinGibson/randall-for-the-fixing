@@ -23,23 +23,23 @@ export default function Contact() {
         </div>
       </section>
       <section className="py-24">
-        <div className="grid grid-cols-3 justify-items-center max-w-screen-xl mx-auto">
-          <div className="flex items-center">
+        <div className="grid gap-10 md:gap-0 md:grid-cols-3 justify-items-center max-w-screen-xl mx-auto">
+          <div className="flex items-center gap-2">
             <BsPhone className="text-4xl text-blue-500" />
             {business.phone}
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
             <FaRegAddressBook className="text-4xl text-blue-500" />
             {business.address}
           </div>
-          <div className="flex items-center break-all">
+          <div className="flex items-center break-all gap-2">
             <BsEnvelope className="text-4xl text-blue-500" />
             {business.email}
           </div>
         </div>
       </section>
       <section className="py-12 flex justify-center items-center">
-        <div className="py-3 px-4 max-w-full w-[500px] bg-blue-800">
+        <div className="py-6 px-4 max-w-full w-[700px] bg-blue-800">
           <formFetcher.Form className="flex flex-col gap-1">
             <label className="uppercase text-white" htmlFor="name">Name</label>
             <input type="text" name="name" id="name" placeholder="Full Name:" className="py-3 px-2" />

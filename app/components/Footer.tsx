@@ -34,7 +34,7 @@ export default function Footer({ business }) {
 
   return (
     <footer className="py-24 px-8 bg-slate-900 relative">
-      <div className="flex flex-col lg:flex-row w-full justify-evenly gap-8">
+      <div className="flex flex-col xl:flex-row w-full justify-evenly gap-8">
         <div className="flex flex-col text-white gap-6">
           <h3 className="text-xl uppercase font-bold">Contact Us</h3>
           <div className="relative yellow-block bg-blue-800 h-1 w-10"></div>
@@ -76,15 +76,15 @@ export default function Footer({ business }) {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-4 lg:w-[320px]">
-          <div className="bg-blue-800 h-full lg:w-[320px] lg:absolute md:top-0 flex flex-col justify-center gap-4 px-8 py-4" style={{ background: "rgba(30,64,175,0.7) url(/assets/svg/waves-background.svg) no-repeat center center / 3000px" }}>
+        <div className="flex flex-col gap-4 xl:w-[320px]">
+          <div className="bg-blue-800 h-full xl:w-[320px] xl:absolute xl:top-0 flex flex-col justify-center gap-4 px-8 py-4" style={{ background: "rgba(30,64,175,0.7) url(/assets/svg/waves-background.svg) no-repeat center center / 3000px" }}>
             <h6 className="uppercase text-white font-bold text-2xl">Subscribe to our newletter</h6>
             <p className="text-sm font-thin text-white">Get weekly discounts from us and our partners</p>
             <Form className="flex flex-col gap-2">
               <label htmlFor="name" className="text-white uppercase font-bold">Name</label>
-              <input type="text" name="name" id="name" className="px-8 md:h-14 " placeholder="Enter Your Name" />
+              <input type="text" name="name" id="name" className="px-8 xl:h-14 " placeholder="Enter Your Name" />
               <label htmlFor="name" className="text-white uppercase font-bold">Email</label>
-              <input type="text" name="email" id="email" className="px-8 md:h-14" placeholder="Email Address:" />
+              <input type="text" name="email" id="email" className="px-8 xl:h-14" placeholder="Email Address:" />
               <div className="flex">
                 <button type="submit" className="mt-4 flex items-center bg-yellow-400 py-3 px-4 gap-4"><span>Join Now</span><BsSendFill /></button>
               </div>
