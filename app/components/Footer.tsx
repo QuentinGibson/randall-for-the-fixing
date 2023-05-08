@@ -1,13 +1,22 @@
-import { Form } from "@remix-run/react";
+import { Form, Link, useFetcher } from "@remix-run/react";
 import { BsEnvelope, BsPhone, BsSendFill } from "react-icons/bs";
+import { useOptionalUser } from "~/utils";
+
+interface Business {
+  phone: string;
+  email: string;
+  address: string;
+}
 
 
-export default function Footer({ business }) {
+export default function Footer({ business }: { business: Business }) {
+  const user = useOptionalUser();
   const { phone, email } = business;
   const areaCode = phone.substring(0, 3)
   const number = phone.substring(4, 7)
   const lastFour = phone.substring(6, 9)
   const formattedPhone = `(${areaCode}) ${number}-${lastFour}`
+  const newsLetterFetcher = useFetcher();
 
   const footerLinks = [
     {
@@ -72,6 +81,11 @@ export default function Footer({ business }) {
                     <a href={link.link}>{link.title}</a>
                   </li>
                 ))}
+                {(user && user.role === 'ADMIN') && (
+                  <li className="hover:text-yellow-500">
+                    <Link to={`/blog/newpost`}>Create Blog Post</Link>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -80,7 +94,7 @@ export default function Footer({ business }) {
           <div className="bg-blue-800 h-full xl:w-[320px] xl:absolute xl:top-0 flex flex-col justify-center gap-4 px-8 py-4" style={{ background: "rgba(30,64,175,0.7) url(/assets/svg/waves-background.svg) no-repeat center center / 3000px" }}>
             <h6 className="uppercase text-white font-bold text-2xl">Subscribe to our newletter</h6>
             <p className="text-sm font-thin text-white">Get weekly discounts from us and our partners</p>
-            <Form className="flex flex-col gap-2">
+            <newsLetterFetcher.Form className="flex flex-col gap-2">
               <label htmlFor="name" className="text-white uppercase font-bold">Name</label>
               <input type="text" name="name" id="name" className="px-8 xl:h-14 " placeholder="Enter Your Name" />
               <label htmlFor="name" className="text-white uppercase font-bold">Email</label>
@@ -88,7 +102,7 @@ export default function Footer({ business }) {
               <div className="flex">
                 <button type="submit" className="mt-4 flex items-center bg-yellow-400 py-3 px-4 gap-4"><span>Join Now</span><BsSendFill /></button>
               </div>
-            </Form>
+            </newsLetterFetcher.Form>
           </div>
         </div>
       </div>

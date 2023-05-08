@@ -109,7 +109,7 @@ export default function Index() {
             </div>
           </div>
           <h3 className="text-3xl font-bold uppercase">Recent Work Showcase</h3>
-          <section className="overflow-hidden md:select-none" ref={projectEmblaRef}>
+          <section className="overflow-hidden" ref={projectEmblaRef}>
             <div className="flex">
               {projects.map(project => (
                 <div className="grow-0 shrink-0 basis-full mr-8 md:basis-[600px] h-[300px] relative" key={project.id}>
@@ -118,16 +118,18 @@ export default function Index() {
                     <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-t from-blue-500 to-transparent flex items-end px-6 py-4">
                       <div className="w-full">
                         <div className="flex justify-between gap-6">
-                          <div className="flex flex-col break-all">
-                            <p className="text-white text-xl font-bold uppercase">
-                              {project.title}
-                            </p>
-                            <p className="text-yellow-500">
-                              {project.serviceId}
-                            </p>
+                          <div className="flex flex-col break-all select-none">
+                            <Link to={`/projects/${project.slug}`}>
+                              <p className="text-white text-xl font-bold uppercase">
+                                {project.title}
+                              </p>
+                              <p className="text-yellow-500">
+                                {project.serviceId}
+                              </p>
+                            </Link>
                           </div>
                           <div className="flex items-center">
-                            <button className="h-[70px] appearance-none bg-yellow-300 w-16 flex justify-center items-center"><BsArrowUpRight className="text-4xl" /></button>
+                            <Link to={`/projects/${project.slug}`} className="h-[70px] appearance-none bg-yellow-300 w-16 flex justify-center items-center"><BsArrowUpRight className="text-4xl" /></Link>
                           </div>
                         </div>
                       </div>
