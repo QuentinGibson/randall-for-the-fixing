@@ -28,9 +28,8 @@ export default function ComponentName() {
         <section className="">
           <div className="grid grid-cols-[2fr_1fr]">
             <div className="flex flex-col">
-              <img className="h-[330px] object-cover" src={blog.image} alt="" />
-              <div>
-                {blog.blogBody}
+              <img className="h-[330px] object-fill w-full aspect-[3/2]" src={blog.image} alt="" />
+              <div dangerouslySetInnerHTML={{ __html: blog.blogBody }}>
               </div>
 
             </div>
