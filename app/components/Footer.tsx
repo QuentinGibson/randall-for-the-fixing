@@ -78,12 +78,23 @@ export default function Footer({ business }: { business: Business }) {
               <ul className="grid grid-cols-3 gap-8 list-disc">
                 {footerLinks.map((link, index) => (
                   <li key={index} className="hover:text-yellow-500">
-                    <a href={link.link}>{link.title}</a>
+                    <Link to={link.link}>{link.title}</Link>
                   </li>
                 ))}
+                {user ? (
+                  <li>
+                    <Form method="POST" action="logout">
+                      <button type="submit">Logout</button>
+                    </Form>
+                  </li>
+                ) : (
+                  <li>
+                    <Link to="/login">Sign In</Link>
+                  </li>
+                )}
                 {(user && user.role === 'ADMIN') && (
                   <li className="hover:text-yellow-500">
-                    <Link to={`/blog/newpost`}>Create Blog Post</Link>
+                    <Link to={`/admin`}>Admin</Link>
                   </li>
                 )}
               </ul>
@@ -106,6 +117,6 @@ export default function Footer({ business }: { business: Business }) {
           </div>
         </div>
       </div>
-    </footer>
+    </footer >
   );
 };
